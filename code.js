@@ -23,9 +23,11 @@ async function getPlayersLong(){
         let message = await response.text()
         if (playerList!=message){
             playerList=message
-            console.log(playerList)
-            playerList.forEach(player=>{
-                playerList.innerHTML+=showPlayers(player)
+            playerListNormalised = JSON.parse(playerList)
+            players.innerHTML=""
+            playerListNormalised.forEach(player=>{
+                players.innerHTML+=showPlayers(player)
+                console.log(player)
             })
         }
         getPlayersLong()
