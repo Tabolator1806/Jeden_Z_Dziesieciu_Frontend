@@ -1,18 +1,35 @@
-async function getPlayers(){
-    fetch("http://localhost:3000/playerList")
-    .then(response=>response.json())
-    .then(data=>{
-        console.log(data)
-        data.forEach(player=>{
-            
-        })
-    })
-}
 function showPlayers(data){
     const player = `
-        <div>
-            <img src="http:
+        <div class="player">
+            <img src="http://localhost:3000/upload/${data.name}.png" class="playerImage" width="20px" height="20px"/>
+            <p class="playerName">${data.name}</p>
         </div>
     `
+    return player
 }
-getPlayers()
+let playerList = []
+async function getPlayersLong(){
+    let response = await fetch("http://localhost:3000/playerList")
+    if (response.status == 502){
+        await getPlayersLong()
+    }
+    else if (response.status != 200){
+        console.log(response.statusText)
+        setTimeout(() => {
+            getPlayersLong()
+        }, 1000);
+    }
+    else{
+        let message = await response.text()
+        if (playerList!=message){
+            playerList=message
+            console.log(playerList)
+            playerList.forEach(player=>{
+                playerList.innerHTML+=showPlayers(player)
+            })
+        }
+        getPlayersLong()
+        
+    }
+}
+getPlayersLong()
