@@ -1,4 +1,5 @@
 function showPlayers(data){
+    
     const player = `
         <div class="player" style="transform: rotateY(${kurwiszon[0]}deg) rotate(${kurwiszon[3]}deg) scale(${kurwiszon[4]}) ; left:${kurwiszon[1]}px; top:${kurwiszon[2]}px">
             <img src="./img/ta_taka_stojakczykichuj.png" class="stojak"/>
@@ -6,7 +7,42 @@ function showPlayers(data){
             <p class="playerName">${data.name}</p>
         </div>
     `
+    if(data.button == true){
+         przycisk(data)
+       
+    }
+
     return player
+}
+function przycisk(data){
+    console.log(data)
+    sigmaa.style.display="block"
+    sigmaa2.style.display="block"
+    sigmaa3.style.display="block"
+    sigmaa4.style.display="block"
+    sigmaa6.style.display="block"
+    sigmaa.style.backgroundImage=`url("http://83.27.64.116:3000/upload/${data.name}.png")`
+    sigmaa.style.backgroundSize='1%'
+    sigmaa2.style.backgroundSize='100%'
+    sigmaa3.style.backgroundSize='50%'
+    sigmaa4.style.backgroundSize='10%'
+    sigmaa4.style.backgroundRepeat = "no-repeat"
+    sigmaa6.style.backgroundRepeat = "no-repeat"
+    sigmaa.style.transition = '2s'
+    sigmaa.style.backgroundPosition = '0px 0px'
+    sigmaa6.style.backgroundPosition = '0px 200px'
+        setTimeout(() => {
+        sigmaa.style.backgroundSize='50%'
+    }, "100");
+
+    setTimeout(() => {
+    sigmaa.style.display="none"
+    sigmaa2.style.display="none"
+    sigmaa3.style.display="none"
+    sigmaa4.style.display="none"
+    sigmaa6.style.display="none"
+    }, "2000");
+
 }
 let playerList = []
 let playeramount = 0
@@ -31,7 +67,7 @@ async function getPlayersLong(){
             playerListNormalised = JSON.parse(playerList)
             players.innerHTML=""
             playeramount = playerListNormalised.length-1
-            serokosc = players.offsetWidth -200
+            serokosc = players.offsetWidth -500
             gura = 0
             
             playerListNormalised.forEach(player=>{
@@ -41,7 +77,7 @@ async function getPlayersLong(){
                 if(kurwiszon[0]+90<=90 && zabijesie!=0 ){
                 kurwiszon[2] = serokosc/2 -Math.tan(((kurwiszon[0]+90)*Math.PI)/180)*zabijesie
                 kurwiszon[4] -= 3/(playeramount/2)}
-                else if(Math.round(kurwiszon[0])==0){
+                else if((-2.0>kurwiszon[0]&&kurwiszon[0]<2.0)|| kurwiszon[0]==0){
                     console.log("what the helly")
                     kurwiszon[2] = 190
                     kurwiszon[4] = 1
@@ -50,7 +86,7 @@ async function getPlayersLong(){
                    kurwiszon[2] = serokosc/2 -Math.tan(((90-kurwiszon[0])*Math.PI)/180)*zabijesie 
                    kurwiszon[4] += 3/(playeramount/2)
                 }
-                console.log(promien,zabijesie,kurwiszon[0]+90,kurwiszon[2],kurwiszon[4])
+                console.log(promien,zabijesie,kurwiszon[0],kurwiszon[2],kurwiszon[4])
                 players.innerHTML+=showPlayers(player)
                 kurwiszon[0]+=140/playeramount
                 kurwiszon[1]+=serokosc/(playeramount)
