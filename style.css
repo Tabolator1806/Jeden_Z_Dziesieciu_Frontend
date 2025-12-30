@@ -3,11 +3,31 @@
     margin: 0 auto;
     
 }
+#tloo{
+    position: absolute;
+    z-index: 0;
+    width: 100vw;
+    height: 100vh;
+     background: #090979;
+        background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(36, 14, 115, 1) 70%,rgba(9, 9, 121, 1)  100%);
+     animation: tlo 3s infinite alternate;
+
+}
 #kurwa{
     height: 100vh;
    background: #090979;
 background: radial-gradient(circle,rgba(9, 9, 121, 1) 0%, rgba(36, 14, 115, 1) 54%, rgba(0, 0, 0, 1) 100%);
 overflow: hidden;
+   
+}
+@keyframes tlo{
+    0% {
+        opacity: 0;
+  }
+
+  100% {
+        opacity:1;
+  }
 }
 .playerImage{
     width: 100px;
@@ -38,6 +58,7 @@ overflow: hidden;
 .player{
     position: absolute;
     width:fit-content ;
+    
     transition: 2s;
  
 }
@@ -122,4 +143,15 @@ overflow: hidden;
     left: 55px;
     width:50px;
     height:50px;
+}
+#qrcode{
+    position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  width: 900px;
+  height: 900px;
+
 }
